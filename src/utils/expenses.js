@@ -4,27 +4,29 @@ const { getValidString } = require('./validation');
 const { getErrorWithStatus } = require('./getError');
 
 const isExpenseValid = (expense) => {
-  const { title, category, spentAt, note } = expense;
+  const { title, spentAt, note, amount, userId, categoryId } = expense;
 
-  const textFields = {
-    title,
-    category,
-    spentAt,
-    note,
-  };
+  // Validare text pentru titlu și notă
+  getValidString(title, 'title');
 
-  Object.entries(textFields).forEach(([key, value]) => {
-    const field = key.toString();
+  if (note) {
+    getValidString(note, 'note');
+  }
 
-    if ((field === 'note' || field === 'category') && !value) {
-      return;
-    }
+  if (!spentAt || isNaN(Date.parse(spentAt))) {
+    throw getErrorWithStatus(400, 'Invalid spentAt date');
+  }
 
-    getValidString(value, field);
-  });
+  if (typeof amount !== 'number') {
+    throw getErrorWithStatus(400, 'Type of amount must be number');
+  }
 
-  if (typeof expense.amount !== 'number') {
-    throw getErrorWithStatus(400, `Type of amount must be number`);
+  if (typeof userId !== 'number') {
+    throw getErrorWithStatus(400, 'userId must be a number');
+  }
+
+  if (typeof categoryId !== 'number') {
+    throw getErrorWithStatus(400, 'categoryId must be a number');
   }
 };
 

@@ -1,5 +1,6 @@
 const expensesServices = require('../services/expensesService.js');
 const usersServices = require('../services/usersService.js');
+const categoriesServices = require('../services/categoriesService.js');
 
 const { asyncHandler } = require('../utils/asyncHandler.js');
 const { isExpenseValid } = require('../utils/expenses.js');
@@ -39,11 +40,20 @@ const getExpenseById = async (req, res) => {
 
 const createExpense = async (req, res) => {
   const userId = getValidId(req.body.userId, 'Wrong user ID');
+  const categoryId = getValidId(req.body.categoryId, 'Wrong category ID');
+
   const user = await usersServices.getUserById(userId);
 
   if (!user) {
     throw getErrorWithStatus(400, 'User not found');
   }
+
+  const category = await categoriesServices.getCategoryById(categoryId);
+
+  if (!category) {
+    throw getErrorWithStatus(400, 'Category not found');
+  }
+
   isExpenseValid(req.body);
 
   const newExpense = await expensesServices.createExpense(req.body);

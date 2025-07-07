@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const { userRouter } = require('./routes/usersRoute');
 const { expensesRouter } = require('./routes/expensesRoute');
+const { categoriesRouter } = require('./routes/categoriesRoute');
 const { errorMiddleware } = require('./middlewares/errorMiddleware');
 
 const createServer = () => {
@@ -20,6 +21,7 @@ const createServer = () => {
 
   app.use('/users', userRouter);
   app.use('/expenses', expensesRouter);
+  app.use('/categories', categoriesRouter);
 
   app.use(errorMiddleware);
 
