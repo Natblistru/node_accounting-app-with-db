@@ -2,6 +2,7 @@
 
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../db.js');
+const { User } = require('./User.model');
 
 const Expense = sequelize.define(
   'Expense',
@@ -15,7 +16,7 @@ const Expense = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'users',
+        model: User,
         key: 'id',
       },
       onDelete: 'CASCADE',

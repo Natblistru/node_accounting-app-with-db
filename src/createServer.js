@@ -11,7 +11,7 @@ const createServer = () => {
 
   const options = {
     origin: '*',
-    methods: 'GET, POST, PUT, DELETE , PATCH',
+    methods: 'GET, POST, PUT, DELETE, PATCH',
     allowedHeaders: 'Content-Type',
     credentials: true,
   };

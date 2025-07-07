@@ -1,10 +1,4 @@
-const getErrorWithStatus = (code, message) => {
-  const error = new Error(message);
-
-  error.status = code;
-
-  return error;
-};
+const { getErrorWithStatus } = require('./getError');
 
 const getValidId = (id, errorMessage) => {
   const numberId = Number(id);

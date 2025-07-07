@@ -24,7 +24,7 @@ const isExpenseValid = (expense) => {
   });
 
   if (typeof expense.amount !== 'number') {
-    throw getErrorWithStatus(400, `Type of amount must be string`);
+    throw getErrorWithStatus(400, `Type of amount must be number`);
   }
 };
 

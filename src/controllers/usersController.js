@@ -1,4 +1,4 @@
-const usersServices = require('../services//usersService.js');
+const usersServices = require('../services/usersService.js');
 const { asyncHandler } = require('../utils/asyncHandler');
 const { getErrorWithStatus } = require('../utils/getError');
 const { getValidId, getValidString } = require('../utils/validation');
